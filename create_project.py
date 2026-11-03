@@ -21,6 +21,7 @@ files = [
     "ingest_sample_kb.py",
     "run.py",
     ".env",
+    ".gitignore"
 ]
 
 for folder in folders:
