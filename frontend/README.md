@@ -7,9 +7,9 @@ React 18 + Vite + TypeScript + Tailwind. Talks to the FastAPI backend in `../app
 Two terminals, from the repo root:
 
 ```bash
-# 1. backend  (http://127.0.0.1:8000)
+# 1. backend  (http://127.0.0.1:8080)
 pip install -r requirements.txt
-uvicorn app.main:app --reload
+uvicorn app.main:app --reload --port 8080
 
 # 2. frontend (http://127.0.0.1:5173)
 cd frontend
@@ -19,7 +19,7 @@ npm run dev
 
 Open http://127.0.0.1:5173.
 
-In dev, Vite proxies `/api/*` to `http://127.0.0.1:8000`, so there is no CORS
+In dev, Vite proxies `/api/*` to `http://127.0.0.1:8080`, so there is no CORS
 hop and no base URL to configure. For a deployed build where the API lives on a
 different origin, set `VITE_API_BASE`:
 
