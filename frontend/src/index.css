@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-canvas text-ink antialiased;
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+      sans-serif;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #2a2a36 transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #2a2a36;
+    border-radius: 999px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid #7c5cff;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .prose-chat {
+    @apply text-[15px] leading-[1.65] text-ink;
+  }
+  .prose-chat p {
+    @apply mb-3 last:mb-0;
+  }
+  .prose-chat ol {
+    @apply list-decimal space-y-1.5 pl-5 mb-3 last:mb-0 marker:text-muted;
+  }
+  .prose-chat ul {
+    @apply list-disc space-y-1.5 pl-5 mb-3 last:mb-0 marker:text-muted;
+  }
+  .prose-chat h1,
+  .prose-chat h2,
+  .prose-chat h3 {
+    @apply font-semibold mb-2 mt-4 first:mt-0;
+  }
+  .prose-chat code {
+    @apply rounded bg-black/40 px-1.5 py-0.5 text-[13px] font-mono text-brand-soft;
+  }
+  .prose-chat pre {
+    @apply mb-3 overflow-x-auto rounded-lg border border-line bg-black/40 p-3;
+  }
+  .prose-chat pre code {
+    @apply bg-transparent p-0 text-ink;
+  }
+  .prose-chat a {
+    @apply text-brand-soft underline underline-offset-2;
+  }
+  .prose-chat strong {
+    @apply font-semibold text-white;
+  }
+  .prose-chat table {
+    @apply mb-3 w-full border-collapse text-sm;
+  }
+  .prose-chat th,
+  .prose-chat td {
+    @apply border border-line px-2.5 py-1.5 text-left;
+  }
+}

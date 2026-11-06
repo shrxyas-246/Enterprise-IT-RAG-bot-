@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     groq_model: str = "openai/gpt-oss-120b"
     top_k: int = 4
     max_retries: int = 1
-    admin_api_key: str = "change-me"#only admin gets access to ingest docs and change data in KB
+    admin_api_key: str = "shrey"#only admin gets access to ingest docs and change data in KB
     audit_db_path: str = str(BASE_DIR / "data" / "audit.db")#storing conversations (sqlite) 
     upload_dir: str = str(BASE_DIR / "uploads")#user uploads docs in this dir (can use bucket S3 service etc etc..)
     sample_kb_dir: str = str(BASE_DIR / "data" / "sample_kb")#extract and keep data
