@@ -1,3 +1,4 @@
+import logging
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -12,7 +13,10 @@ settings = get_settings()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     configure_logging()
-    init_db()
+    try:
+        init_db()
+    except Exception:  # audit log is best-effort; the API must still start
+        logging.getLogger(__name__).exception("Audit DB init failed")
     yield
 
 

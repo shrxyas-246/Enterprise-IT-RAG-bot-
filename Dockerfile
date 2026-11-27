@@ -13,6 +13,8 @@ RUN pip install --no-cache-dir --upgrade pip \
 
 COPY . .
 
+RUN python -c "from fastembed import TextEmbedding; TextEmbedding('sentence-transformers/all-MiniLM-L6-v2', cache_dir='/app/.cache/fastembed')"
+
 EXPOSE 8080
 
 CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}"]
