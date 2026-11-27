@@ -1,6 +1,6 @@
 import time
 from pinecone import Pinecone, ServerlessSpec
-from langchain_community.embeddings import FastEmbedEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from app.core.config import get_settings
 
@@ -44,14 +44,9 @@ def get_embedding_dimension(model_name: str | None = None) -> int:
 def get_embeddings():
     global _embeddings
     if _embeddings is None:
-        # ONNX runtime instead of PyTorch: same all-MiniLM-L6-v2 model and
-        # normalised 384-d vectors, so existing Pinecone data stays valid,
-        # without the multi-GB torch install. max_length matches the
-        # sentence-transformers default (256) for this model.
-        _embeddings = FastEmbedEmbeddings(
+        _embeddings = HuggingFaceEmbeddings(
             model_name=settings.embedding_model,
-            max_length=256,
-            cache_dir=settings.embedding_cache_dir,
+            encode_kwargs={"normalize_embeddings": True},
         )
     return _embeddings
 
