@@ -1,11 +1,8 @@
-import os
 from functools import lru_cache
 from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BASE_DIR = Path(__file__).resolve().parents[2]
-# Serverless hosts (e.g. Vercel) only allow writes under /tmp.
-WRITABLE_DIR = Path("/tmp") if os.environ.get("VERCEL") else BASE_DIR
 
 class Settings(BaseSettings):
     app_name: str = "Enterprise IT Support Agentic RAG Copilot"
@@ -20,10 +17,9 @@ class Settings(BaseSettings):
     top_k: int = 4
     max_retries: int = 1
     admin_api_key: str = "shrey"#only admin gets access to ingest docs and change data in KB
-    audit_db_path: str = str(WRITABLE_DIR / "data" / "audit.db")#storing conversations (sqlite) 
-    upload_dir: str = str(WRITABLE_DIR / "uploads")#user uploads docs in this dir (can use bucket S3 service etc etc..)
+    audit_db_path: str = str(BASE_DIR / "data" / "audit.db")#storing conversations (sqlite) 
+    upload_dir: str = str(BASE_DIR / "uploads")#user uploads docs in this dir (can use bucket S3 service etc etc..)
     sample_kb_dir: str = str(BASE_DIR / "data" / "sample_kb")#extract and keep data
-    embedding_cache_dir: str = str(WRITABLE_DIR / ".cache" / "fastembed")#downloaded ONNX embedding model
 
     model_config = SettingsConfigDict(env_file=str(BASE_DIR / ".env"), extra="ignore")
 @lru_cache
